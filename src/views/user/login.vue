@@ -27,7 +27,21 @@
 </template>
 
 <script>
+import { login} from '../../api/user'
 export default {
+    data() {
+        return {
+            username: '',
+            password: '',
+        };
+    },
+    methods: {
+        onSubmit(values) {
+            console.log('submit', values);
+            login({username: this.username,
+            password: this.password}).then(res=>console.log('res',res))
+        },
+    },
 
 }
 </script>

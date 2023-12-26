@@ -22,10 +22,26 @@
   />
 
    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item>1</van-swipe-item>
-        <van-swipe-item>2</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
+        <van-swipe-item><van-image
+          width="390"
+          height="150"
+          src="https://img01.yzcdn.cn/vant/cat.jpeg"
+        /></van-swipe-item>
+        <van-swipe-item><van-image
+          width="390"
+          height="150"
+          src="https://house-agents.oss-cn-beijing.aliyuncs.com/1735326712989818896/2023/12/23/1703324407264_8e7853.jpg"
+        /></van-swipe-item>
+        <van-swipe-item><van-image
+          width="390"
+          height="150"
+          src="https://img01.yzcdn.cn/vant/cat.jpeg"
+        /></van-swipe-item>
+        <van-swipe-item><van-image
+          width="390"
+          height="150"
+          src="https://house-agents.oss-cn-beijing.aliyuncs.com/1735326712989818896/2023/12/23/1703324407264_8e7853.jpg"
+        /></van-swipe-item>
       </van-swipe>
   
       <van-list
@@ -35,14 +51,14 @@
         @load="onLoad"
       >
       <!-- :title="item" -->
-  <van-cell v-for="item in list" :key="item"  >
-      <div><van-card
+  <van-cell v-for="item in list" :key="item.id"  >
+      <div @click="openDetail(item)"><van-card 
             num="2"
             tag="特价"
             price="2000.00"
-            desc="描述信息"
-            title="房源标题"
-            thumb="https://img01.yzcdn.cn/vant/cat.jpeg"
+            :desc="item.remark"
+            :title="item.community"
+            :thumb="thumb(item)"
             origin-price="2800.00"
           /></div>
   </van-cell>
@@ -60,6 +76,8 @@
 
 <script>
 import HelloWorld from '@/components/HelloWorld.vue'
+import { getHouseList } from '../api/house'
+console.log('getHouseList',getHouseList)
 
 export default {
   name: 'Home',
@@ -73,27 +91,51 @@ export default {
       list: [],
       loading: false,
       finished: false,
-      imgUrl:'../static/1.jpg'
+      imgUrl:'../static/1.jpg',
+      defaultThumb:'https://house-agents.oss-cn-beijing.aliyuncs.com/1735326712989818896/2023/12/23/1703324407264_8e7853.jpg'
     };
   },
+  computed:{
+    thumb(){
+      return function(item){
+					if(item.houseAttachment && item.houseAttachment[0] && item.houseAttachment[0].url){
+            return item.houseAttachment[0].url
+          }else{
+            return this.defaultThumb
+          }
+      }
+    }
+  },
+  mounted(){
+      
+  },
   methods: {
-    onLoad() {
+    openDetail(item){
+      console.log(item,'item')
+      this.$router.push({ name:'Detail', query:{ id:item.id } })
+    },
+    async onLoad() {
+      const page  = {pageNum:0,pageSize:10}
+      const res = await getHouseList({},page)
+      console.log('res',res)
+      console.log('res.data.data.items',res.data.data.items.records)
+      this.list = res.data.data.items.records
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
-      setTimeout(() => {
-        for (let i = 0; i < 10; i++) {
+      // setTimeout(() => {
+      //   for (let i = 0; i < 10; i++) {
 
-          this.list.push(this.list.length + 1);
-        }
+      //     this.list.push(this.list.length + 1);
+      //   }
 
-        // 加载状态结束
-        this.loading = false;
+      //   // 加载状态结束
+      //   this.loading = false;
 
-        // 数据全部加载完成
-        if (this.list.length >= 40) {
-          this.finished = true;
-        }
-      }, 1000);
+      //   // 数据全部加载完成
+      //   if (this.list.length >= 40) {
+      //     this.finished = true;
+      //   }
+      // }, 1000);
     },
   },
 }

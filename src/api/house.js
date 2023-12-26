@@ -2,8 +2,8 @@ import axios from "axios";
 import request from '../utils/request' 
 
 //用户注册
-export function register(user){
-    return  request.post('/admin/user/save',user)
+export function getHouseList(houseSearchVo,page){
+    return request.post(`/admin/house/${page.pageNum}/${page.pageSize}`,houseSearchVo)
 }
 
 //用户登录

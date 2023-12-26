@@ -11,6 +11,12 @@ import { Cell } from 'vant';
 import { NoticeBar } from 'vant';
 import { Search } from 'vant';
 import { Card } from 'vant';
+import { Image as VanImage } from 'vant';
+import { Picker } from 'vant';
+
+Vue.use(Picker);
+
+Vue.use(VanImage);
 
 Vue.use(Card);
 Vue.use(Search);
