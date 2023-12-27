@@ -5,6 +5,12 @@ import Login from '../views/user/login.vue'
 import Register from '../views/user/register.vue'
 import Detail from '../views/house/detail.vue'
 
+
+import My from '../views/tab/my.vue'
+import Recharge from '../views/tab/recharge.vue'
+import Search from '../views/tab/search.vue'
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +33,21 @@ const routes = [
     path: '/detail',
     name: 'Detail',
     component: Detail
+  },
+  {
+    path: '/my',
+    name: 'My',
+    component: My
+  },
+  {
+    path: '/recharge',
+    name: 'Recharge',
+    component: Recharge
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   },
   {
     path: '/about',

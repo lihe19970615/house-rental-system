@@ -8,7 +8,7 @@ axios.defaults.headers['Access-Control-Allow-Origin'] = '*'
 
 // 加请求拦截器添
 axios.interceptors.request.use(function (config) {
-  config.headers["token"] = 'a1d98d4729cd4eb1bdd427aebb5fed62';
+  config.headers["token"] = '2fd28eb9f3ce42c6a7cf49a8cebbb98d';
   config.headers['content-type'] = 'application/json';
     // 在发送请求之前做些什么
     return config;

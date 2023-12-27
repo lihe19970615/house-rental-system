@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">出个房</router-link> |
+      <router-link to="/">找个房</router-link> |
       <router-link to="/register">李贺</router-link>
       <!-- <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item>1</van-swipe-item>
@@ -11,6 +11,12 @@
       </van-swipe> -->
     </div>
     <router-view/>
+    <van-tabbar route>
+    <van-tabbar-item icon="home-o" to='/'>首页</van-tabbar-item>
+    <van-tabbar-item icon="search" to='/search'>房源</van-tabbar-item>
+    <van-tabbar-item icon="friends-o" to='/Recharge'>充值</van-tabbar-item>
+    <van-tabbar-item icon="setting-o" to='/my'>我的</van-tabbar-item>
+  </van-tabbar>
   </div>
 </template>
 

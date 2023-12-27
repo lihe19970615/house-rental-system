@@ -28,6 +28,7 @@
 
 <script>
 import { login} from '../../api/user'
+import { Toast } from 'vant';
 export default {
     data() {
         return {
@@ -36,10 +37,14 @@ export default {
         };
     },
     methods: {
-        onSubmit(values) {
+        async onSubmit(values) {
             console.log('submit', values);
-            login({username: this.username,
-            password: this.password}).then(res=>console.log('res',res))
+            const res = await login({username: this.username,password: this.password})
+            if(res.data.code == 200) {
+                this.$router.push({ name:'Home' })
+            }else{
+                Toast(`${res.data.message}`);
+            }
         },
     },
 

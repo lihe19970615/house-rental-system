@@ -4,7 +4,7 @@
         <van-form @submit="onSubmit">
             <van-field
                 v-model="username"
-                name="用户名"
+                name="username"
                 label="用户名"
                 placeholder="用户名"
                 :rules="[{ required: true, message: '请填写用户名' }]"
@@ -12,60 +12,51 @@
             <van-field
                 v-model="password"
                 type="password"
-                name="密码"
+                name="password"
                 label="密码"
                 placeholder="密码"
                 :rules="[{ required: true, message: '请填写密码' }]"
             />
             <van-field
-                v-model="password"
+                v-model="confirm_password"
                 type="password"
-                name="密码"
+                name="confirm_password"
                 label="确认密码"
                 placeholder="确认密码"
-                :rules="[{ required: true, message: '请填写密码' }]"
+                @blur="confirmPassword"
+                :rules="[{ required: true, message: '请确认两次输入密码一致' }]"
             />
             <van-field
-                v-model="password"
-                type="password"
-                name="密码"
+                v-model="phone"
+                type="number"
+                name="phone"
                 label="手机号码"
                 placeholder="手机号码"
-                :rules="[{ required: true, message: '请填写密码' }]"
+                :rules="[{ required: true, message: '请填写手机号码' }]"
             />
-
-            <!-- <van-field
-                v-model="password"
-                type="password"
-                name="密码"
-                label="手机号码"
-                placeholder="手机号码"
-                :rules="[{ required: true, message: '请填写密码' }]"
-            /> -->
 
             <van-field
                 readonly
                 clickable
-                name="picker"
+                name="role"
                 :value="value"
-                label="选择器"
-                placeholder="点击选择城市"
+                label="身份"
+                placeholder="点击选择身份"
                 @click="showPicker = true"
                 />
-                <van-popup v-model="showPicker" position="bottom">
-                <van-picker
-                    show-toolbar
-                    :columns="columns"
-                    @confirm="onConfirm"
-                    @cancel="showPicker = false"
-                />
+                <van-popup v-model="showPicker" v-if="showPicker" position="bottom">
+                    <van-picker
+                        show-toolbar
+                        :columns="columns"
+                        @confirm="onConfirm"
+                        @cancel="showPicker = false"
+                    />
                 </van-popup>
 
             <div style="margin: 16px;">
                 <van-button round block type="info" native-type="submit">提交</van-button>
             </div>
         </van-form>
-        
         <router-link to="/login"><div>已经有账号,去登录</div></router-link>
         
     </div>
@@ -80,17 +71,22 @@ export default {
         return {
             username: '',
             password: '',
+            confirm_password:'',
+            phone:'',
             value: '',
-            columns: ['杭州', '宁波', '温州', '嘉兴', '湖州'],
+            columns: ['房东', '经纪人', '客户', '管理员'],
             showPicker: false,
         };
     },
     methods: {
-        onSubmit(values) {
+        async onSubmit(values) {
             console.log('submit', values);
-            console.log('register',register)
-            register({username: this.username,
-            password: this.password}).then(res=>console.log('res',res))
+            const res = await register({username: this.username,password: this.password})
+            if(res.data.code == 200) {
+                this.$router.push({ name:'Detail', query:{ id:item.id } })
+            }else{
+                Toast(`${res.data.message}`);
+            }
         },
         onConfirm(value, index) {
             Toast(`当前值：${value}, 当前索引：${index}`);
@@ -105,6 +101,11 @@ export default {
             this.value = value;
             this.showPicker = false;
         },
+        confirmPassword(){
+            if(this.confirm_password !== this.password){
+                Toast('请确认两次输入密码一致');
+            }
+        }
     },
 }
 </script>

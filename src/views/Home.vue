@@ -18,10 +18,19 @@
 
   <van-notice-bar
     left-icon="volume-o"
-    text="在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。"
+    text="欢迎尊贵的李总使用找个房！！！欢迎尊贵的李总使用找个房！！！欢迎尊贵的李总使用找个房！！！"
   />
 
-   <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+  <van-grid :column-num="3">
+    <van-grid-item icon="user" text="找房东" />
+    <van-grid-item icon="wap-home" text="找小区" />
+    <van-grid-item icon="map-marked" text="找地铁" />
+    <van-grid-item icon="gold-coin" text="找价位" />
+    <van-grid-item icon="newspaper" text="找户型" />
+    <van-grid-item icon="friends" text="找中介" />
+  </van-grid>
+
+   <!-- <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item><van-image
           width="390"
           height="150"
@@ -42,7 +51,7 @@
           height="150"
           src="https://house-agents.oss-cn-beijing.aliyuncs.com/1735326712989818896/2023/12/23/1703324407264_8e7853.jpg"
         /></van-swipe-item>
-      </van-swipe>
+      </van-swipe> -->
   
       <van-list
         v-model="loading"
@@ -51,25 +60,32 @@
         @load="onLoad"
       >
       <!-- :title="item" -->
-  <van-cell v-for="item in list" :key="item.id"  >
-      <div @click="openDetail(item)"><van-card 
-            num="2"
-            tag="特价"
-            price="2000.00"
-            :desc="item.remark"
-            :title="item.community"
-            :thumb="thumb(item)"
-            origin-price="2800.00"
-          /></div>
-  </van-cell>
-</van-list>
+      <van-cell v-for="item in list" :key="item.id"  >
+          <div @click="openDetail(item)"><van-card 
+                num="2"
+                tag="特价"
+                price="2000.00"
+                :desc="item.remark"
+                :title="item.community"
+                :thumb="thumb(item)"
+                origin-price="2800.00"
+              /></div>
+      </van-cell>
+        <duv class="" style="position: fixed;bottom: 100px;">
+          <van-button type="primary">+</van-button>
+        </duv>
+    </van-list>
 
-  <van-tabbar route>
+  <!-- <van-tabbar route>
     <van-tabbar-item icon="home-o" to='/'>首页</van-tabbar-item>
-    <van-tabbar-item icon="search" to='/login'>房源</van-tabbar-item>
-    <van-tabbar-item icon="friends-o" to='/login'>充值</van-tabbar-item>
-    <van-tabbar-item icon="setting-o" to='/register'>我的</van-tabbar-item>
-  </van-tabbar>
+    <van-tabbar-item icon="search" to='/search'>房源</van-tabbar-item>
+    <van-tabbar-item icon="friends-o" to='/Recharge'>充值</van-tabbar-item>
+    <van-tabbar-item icon="setting-o" to='/my'>我的</van-tabbar-item>
+  </van-tabbar> -->
+
+  <van-sticky>
+    <van-button type="primary">基础用法</van-button>
+  </van-sticky>
 </van-tabs>
   </div>
 </template>
@@ -77,7 +93,6 @@
 <script>
 import HelloWorld from '@/components/HelloWorld.vue'
 import { getHouseList } from '../api/house'
-console.log('getHouseList',getHouseList)
 
 export default {
   name: 'Home',

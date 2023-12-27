@@ -13,6 +13,17 @@ import { Search } from 'vant';
 import { Card } from 'vant';
 import { Image as VanImage } from 'vant';
 import { Picker } from 'vant';
+import { DropdownMenu, DropdownItem } from 'vant';
+import { Grid, GridItem } from 'vant';
+import { Sticky } from 'vant';
+
+Vue.use(Sticky);
+
+Vue.use(Grid);
+Vue.use(GridItem);
+
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 
 Vue.use(Picker);
 
