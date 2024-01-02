@@ -83,7 +83,7 @@ export default {
             console.log('submit', values);
             const res = await register({username: this.username,password: this.password})
             if(res.data.code == 200) {
-                this.$router.push({ name:'Detail', query:{ id:item.id } })
+                this.$router.push({ name:'Login' })
             }else{
                 Toast(`${res.data.message}`);
             }

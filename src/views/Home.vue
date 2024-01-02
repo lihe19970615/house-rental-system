@@ -22,7 +22,7 @@
   />
 
   <van-grid :column-num="3">
-    <van-grid-item icon="user" text="找房东" />
+    <van-grid-item icon="user" text="找房东"  @click="jump"/>
     <van-grid-item icon="wap-home" text="找小区" />
     <van-grid-item icon="map-marked" text="找地铁" />
     <van-grid-item icon="gold-coin" text="找价位" />
@@ -125,6 +125,9 @@ export default {
       
   },
   methods: {
+    jump(){
+      this.$router.push({ name:'Search' ,query:{ type:'landlord' }})
+    },
     openDetail(item){
       console.log(item,'item')
       this.$router.push({ name:'Detail', query:{ id:item.id } })
