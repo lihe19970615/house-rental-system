@@ -4,7 +4,7 @@ import Home from '../views/home.vue'
 import Login from '../views/user/login.vue'
 import Register from '../views/user/register.vue'
 import Detail from '../views/house/detail.vue'
-
+import Grounding from '../views/house/grounding.vue'
 
 import My from '../views/tab/my.vue'
 import Recharge from '../views/tab/recharge.vue'
@@ -33,6 +33,11 @@ const routes = [
     path: '/detail',
     name: 'Detail',
     component: Detail
+  },
+  {
+    path: '/grounding',
+    name: 'Grounding',
+    component: Grounding
   },
   {
     path: '/my',
