@@ -16,7 +16,24 @@ import { Picker } from 'vant';
 import { DropdownMenu, DropdownItem } from 'vant';
 import { Grid, GridItem } from 'vant';
 import { Sticky } from 'vant';
+import { Uploader } from 'vant';
+import { RadioGroup, Radio } from 'vant';
+import { NumberKeyboard } from 'vant';
+import { Stepper } from 'vant';
+import { Popup } from 'vant';
+import { TreeSelect } from 'vant';
 
+Vue.use(TreeSelect);
+Vue.use(Popup);
+
+Vue.use(Stepper);
+
+Vue.use(NumberKeyboard);
+
+Vue.use(Radio);
+Vue.use(RadioGroup);
+
+Vue.use(Uploader);
 Vue.use(Sticky);
 
 Vue.use(Grid);
